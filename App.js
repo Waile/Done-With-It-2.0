@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from "react";
+import ListingEditScreen from "./app/screens/ListingEditScreen";
+import Screen from "./app/components/Screen";
+import * as ImagePicker from 'expo-image-picker'
+import { Alert } from "react-native";
+
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const [imageUri, setImageUri] = useState()
+  const requestPermission = async () => {
+    const { granted } = await ImagePicker.requestCameraPermissionsAsync()
+    if (!granted) {
+      Alert("You need to enable permission to access the library")
+    }
+  }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  const selectImage = async () => {
+   try {
+     const response = await ImagePicker.launchImageLibraryAsync()
+     
+
+   } catch (error) {
+    console.log("Error while getting the image",error);
+   }
+  
+  }
+
+  useEffect(() => {
+    requestPermission()
+  }, [])
+  
+  return <Screen></Screen>;
+}
