@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
 import Screen from "./app/components/Screen";
 import * as ImagePicker from 'expo-image-picker'
-import { Alert } from "react-native";
+import { Alert, Button, Image } from "react-native";
 
 
 export default function App() {
@@ -17,7 +17,9 @@ export default function App() {
   const selectImage = async () => {
    try {
      const response = await ImagePicker.launchImageLibraryAsync()
-     
+     if (!response.canceled) {
+      setImageUri(response.assets[0].uri)
+     }
 
    } catch (error) {
     console.log("Error while getting the image",error);
@@ -29,5 +31,8 @@ export default function App() {
     requestPermission()
   }, [])
   
-  return <Screen></Screen>;
+  return <Screen>
+    <Button title="Select Image" onPress={selectImage} />
+    <Image source={{uri:imageUri}} style={{height:200,width:200}} />
+  </Screen>;
 }
