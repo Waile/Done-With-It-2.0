@@ -33,3 +33,8 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+
+# folder_to_ignore/
+backend/
+DoneWithIt-Backend.zip
