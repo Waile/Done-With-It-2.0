@@ -36,6 +36,7 @@ function ListingsScreen({ navigation }) {
   const getListingsApi = useApi(listingsApi.getListings);
   useEffect(() => {
     getListingsApi.request();
+    // getListingsApi.request(a,b,c) api call with parameters/arguments
   }, []);
 
   return (
